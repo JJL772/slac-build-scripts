@@ -22,8 +22,8 @@ if [ -z "$ARCH" ]; then
     usage
 fi
 
-mkdir -p $EPICS_PACKAGE_TOP/zeromq/$VER
-cd $EPICS_PACKAGE_TOP/zeromq/$VER
+mkdir -p $EPICS_PACKAGE_TOP/libzmq/$VER
+cd $EPICS_PACKAGE_TOP/libzmq/$VER
 
 # Download and extract if not already
 if [ ! -d src ]; then
@@ -36,7 +36,7 @@ if [ ! -d src ]; then
     #fi
     #tar -xzf bzip2-$VER.tar.gz
     #mv bzip2-$VER src
-    git clone --tags git@github.com:zeromq/libzmq.git src
+    git clone --tags git@github.com:libzmq/libzmq.git src
 fi
 
 if [ ! -d "$ARCH" ]; then
@@ -55,7 +55,7 @@ if [ ! -f configure ]; then
     ./autogen.sh
 fi
 
-./configure CC=$CC CXX=$CXX --prefix=$EPICS_PACKAGE_TOP/zeromq/$VER/$ARCH
+./configure CC=$CC CXX=$CXX --prefix=$EPICS_PACKAGE_TOP/libzmq/$VER/$ARCH
 
 make -j$(nproc)
 
