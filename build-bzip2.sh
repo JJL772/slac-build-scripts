@@ -9,7 +9,8 @@ SSH_TUNNEL="$3"
 TOP="$(realpath "$(dirname "${BASH_SOURCE[0]}")")"
 
 function usage {
-    echo "USAGE: $0 <version> <arch>"
+    echo "USAGE: $0 <version> <arch> [ssh tunnel]"
+    echo "ssh tunnel is optional. You can downlading using another machine that you have access"
     echo "Ex:"
     echo " $0 1.0.8 rhel9-x86_64"
     exit 1
@@ -38,7 +39,7 @@ if [ ! -d src ]; then
     mv bzip2-$VER src
 fi
 
-mkdir -p build/$ARCH
+mkdir $ARCH
 cd src
 
 if [ -f "$TOP/toolchains/$ARCH.bash" ]; then
@@ -47,4 +48,4 @@ fi
 
 make -j$(nproc)
 
-make install PREFIX="$PWD/../build/$ARCH"
+make install PREFIX="$PWD/../$ARCH"
