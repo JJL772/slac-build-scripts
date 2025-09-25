@@ -2,7 +2,7 @@
 # vim: ts=4 sw=4 et
 set -e
 VER="$1"
-ARCH="$2"
+TARGET="$2"
 # SSH tunnel is optional in case you are having trouble with http proxies
 #SSH_TUNNEL="$3"
 
@@ -18,7 +18,7 @@ function usage {
 if [ -z "$VER" ]; then
     usage
 fi
-if [ -z "$ARCH" ]; then
+if [ -z "$TARGET" ]; then
     usage
 fi
 
@@ -39,15 +39,15 @@ if [ ! -d src ]; then
     git clone --tags git@github.com:zeromq/libzmq.git src
 fi
 
-if [ ! -d "$ARCH" ]; then
-    mkdir $ARCH
+if [ ! -d "$TARGET" ]; then
+    mkdir $TARGET
 fi
 
 cd src
 git checkout $VER
 
-if [ -f "$TOP/toolchains/$ARCH.bash" ]; then
-    source "$TOP/toolchains/$ARCH.bash"
+if [ -f "$TOP/toolchains/$TARGET.bash" ]; then
+    source "$TOP/toolchains/$TARGET.bash"
 fi
 
 # We have to generate the configure script if it doesn't exist
@@ -55,7 +55,7 @@ if [ ! -f configure ]; then
     ./autogen.sh
 fi
 
-./configure CC=$CC CXX=$CXX AR=$AR --prefix=$EPICS_PACKAGE_TOP/libzmq/$VER/$ARCH
+./configure CC=$CC CXX=$CXX AR=$AR --prefix=$EPICS_PACKAGE_TOP/libzmq/$VER/$TARGET
 
 make -j$(nproc)
 

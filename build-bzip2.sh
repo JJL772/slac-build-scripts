@@ -2,7 +2,7 @@
 # vim: ts=4 sw=4 et
 set -e
 VER="$1"
-ARCH="$2"
+TARGET="$2"
 # SSH tunnel is optional in case you are having trouble with http proxies
 SSH_TUNNEL="$3"
 
@@ -19,7 +19,7 @@ function usage {
 if [ -z "$VER" ]; then
     usage
 fi
-if [ -z "$ARCH" ]; then
+if [ -z "$TARGET" ]; then
     usage
 fi
 
@@ -39,13 +39,13 @@ if [ ! -d src ]; then
     mv bzip2-$VER src
 fi
 
-mkdir $ARCH
+mkdir $TARGET
 cd src
 
-if [ -f "$TOP/toolchains/$ARCH.bash" ]; then
-    source "$TOP/toolchains/$ARCH.bash"
+if [ -f "$TOP/toolchains/$TARGET.bash" ]; then
+    source "$TOP/toolchains/$TARGET.bash"
 fi
 
 make -j$(nproc)
 
-make install PREFIX="$PWD/../$ARCH"
+make install PREFIX="$PWD/../$TARGET"

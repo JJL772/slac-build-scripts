@@ -2,7 +2,7 @@
 # vim: ts=4 sw=4 et
 set -e
 VER="$1"
-ARCH="$2"
+TARGET="$2"
 
 TOP="$(realpath "$(dirname "${BASH_SOURCE[0]}")")"
 
@@ -16,23 +16,23 @@ function usage {
 if [ -z "$VER" ]; then
     usage
 fi
-if [ -z "$ARCH" ]; then
+if [ -z "$TARGET" ]; then
     usage
 fi
 
 mkdir -p $EPICS_PACKAGE_TOP/dhcp/$VER
 cd $EPICS_PACKAGE_TOP/dhcp/$VER
 
-mkdir -p "build/$ARCH"
-cd "build/$ARCH"
+mkdir -p "build/$TARGET"
+cd "build/$TARGET"
 
-if [[ $ARCH = *"buildroot"* ]]; then
+if [[ $TARGET = *"buildroot"* ]]; then
     echo "Building for buildroot"
-    . $EPICS_PACKAGE_TOP/build-scripts/toolchains/$ARCH.bash
+    . $EPICS_PACKAGE_TOP/build-scripts/toolchains/$TARGET.bash
     export PATH="${TOOLCHAIN_PATH}/bin:$PATH"
-    ../../dhcp-$VER/configure --prefix="$PWD/../../$ARCH" --host $TARGET_SYSTEM --with-randomdev=no
+    ../../dhcp-$VER/configure --prefix="$PWD/../../$TARGET" --host $TARGET_SYSTEM --with-randomdev=no
 else
-    ../../dhcp-$VER/configure --prefix="$PWD/../../$ARCH" --with-randomdev=no
+    ../../dhcp-$VER/configure --prefix="$PWD/../../$TARGET" --with-randomdev=no
 fi
 
 make && make install
