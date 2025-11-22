@@ -21,6 +21,15 @@ if [ -z "$ARCH" ]; then
 fi
 
 cd $EPICS_PACKAGE_TOP/yaml-cpp/$VER/src
+
+# Apply patches
+if [ ! -f .yaml-cpp_patches-applied ]; then
+    for f in "$TOP/patches/*-yaml-cpp*.diff"; do
+        patch -u -p1 < $f
+    done
+    touch .yaml-cpp_patches-applied
+fi
+
 mkdir -p ../build
 
 if [[ $ARCH =~ "buildroot"* ]]; then

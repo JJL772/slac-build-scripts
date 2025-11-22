@@ -1,0 +1,12 @@
+diff --git a/include/yaml-cpp/node/detail/iterator.h b/include/yaml-cpp/node/detail/iterator.h
+index 2c701af..0bb3f72 100644
+--- a/include/yaml-cpp/node/detail/iterator.h
++++ b/include/yaml-cpp/node/detail/iterator.h
+@@ -12,6 +12,7 @@
+ #include "yaml-cpp/node/detail/node_iterator.h"
+ #include <boost/iterator/iterator_adaptor.hpp>
+ #include <boost/utility.hpp>
++#include <boost/next_prior.hpp>
+ 
+ namespace YAML {
+ namespace detail {
