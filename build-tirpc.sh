@@ -2,7 +2,7 @@
 # vim: ts=4 sw=4 et
 set -e
 VER="$1"
-ARCH="$2"
+TARGET="$2"
 
 TOP="$(realpath "$(dirname "${BASH_SOURCE[0]}")")"
 
@@ -16,7 +16,7 @@ function usage {
 if [ -z "$VER" ]; then
     usage
 fi
-if [ -z "$ARCH" ]; then
+if [ -z "$TARGET" ]; then
     usage
 fi
 
@@ -30,18 +30,18 @@ if [ ! -d src ]; then
     mv libtirpc-$VER src
 fi
 
-mkdir -p build/$ARCH
-cd build/$ARCH
+mkdir -p build/$TARGET
+cd build/$TARGET
 
-if [ -f "$TOP/toolchains/$ARCH.bash" ]; then
-    source "$TOP/toolchains/$ARCH.bash"
+if [ -f "$TOP/toolchains/$TARGET.bash" ]; then
+    source "$TOP/toolchains/$TARGET.bash"
 fi
 
 export CFLAGS=-fPIC
 if [ ! -z "$TARGET_SYSTEM" ]; then
-    ../../src/configure --prefix="$PWD/../../$ARCH" --disable-gssapi --host=$TARGET_SYSTEM
+    ../../src/configure --prefix="$PWD/../../$TARGET" --disable-gssapi --host=$TARGET_SYSTEM
 else
-    ../../src/configure --prefix="$PWD/../../$ARCH" --disable-gssapi 
+    ../../src/configure --prefix="$PWD/../../$TARGET" --disable-gssapi 
 fi
 
 make install -j$(nproc)
