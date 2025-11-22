@@ -27,7 +27,7 @@ if [ ! -f .yaml-cpp_patches-applied ]; then
     for f in "$TOP/patches/*-yaml-cpp*.diff"; do
         patch -u -p1 < $f
     done
-    touch .yalm-cpp_patches-applied
+    touch .yaml-cpp_patches-applied
 fi
 
 mkdir -p ../build
