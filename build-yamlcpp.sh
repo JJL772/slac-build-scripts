@@ -33,7 +33,7 @@ fi
 mkdir -p ../build
 
 if [[ $ARCH =~ "buildroot"* ]]; then
-    EXTRA_CMAKE_ARGS="-DCMAKE_TOOLCHAIN_FILE=${TOP}/toolchains/${ARCH}.cmake"
+    EXTRA_CMAKE_ARGS="-DCMAKE_TOOLCHAIN_FILE=${TOP}/cmake-toolchains/${ARCH}.cmake"
 fi
 
 # Boost build? darn...
