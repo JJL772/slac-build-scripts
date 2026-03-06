@@ -28,7 +28,7 @@ cd "build/$TARGET"
 
 if [[ $TARGET = *"buildroot"* ]]; then
     echo "Building for buildroot"
-    . $EPICS_PACKAGE_TOP/build-scripts/toolchains/$TARGET.bash
+    . ${TOP}/toolchains/$TARGET.bash
     export PATH="${TOOLCHAIN_PATH}/bin:$PATH"
     ../../dhcp-$VER/configure --prefix="$PWD/../../$TARGET" --host $TARGET_SYSTEM --with-randomdev=no
 else

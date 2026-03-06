@@ -35,11 +35,11 @@ fi
 
 if [[ $TARGET = *"rtems"* ]]; then
     echo "Building for RTEMS"
-    . $EPICS_PACKAGE_TOP/build-scripts/toolchains/$TARGET.bash
+    . ${TOP}/toolchains/$TARGET.bash
     ../../src/configure --prefix="$PWD/../../$TARGET" --enable-rtemsbsp="${RTEMS_BSPS}" --exec-prefix="${EPICS_PACKAGE_TOP}/alglib/$VER/RTEMS-\${rtems_bsp}" --with-rtems-top="${RTEMS_TOP}"
 elif [[ $TARGET = *"buildroot"* ]]; then
     echo "Building for buildroot"
-    . $EPICS_PACKAGE_TOP/build-scripts/toolchains/$TARGET.bash
+    . ${TOP}/toolchains/$TARGET.bash
     export PATH="${TOOLCHAIN_PATH}/bin:$PATH"
     ../../src/configure --prefix="$PWD/../../$TARGET" --host $TARGET_SYSTEM
 else
