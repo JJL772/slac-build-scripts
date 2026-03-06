@@ -6,5 +6,9 @@ export CC="powerpc-rtems-gcc"
 export CXX="powerpc-rtems-g++"
 export AR="powerpc-rtems-gcc-ar"
 
+# NOTE: Even though this says 'beatnik', bsp_specs is actually generic enough to be used for all PPC targets
+export CFLAGS="-B/afs/slac/package/rtems/4.10.2/target/rtems_p3/powerpc-rtems/beatnik/lib/ -specs bsp_specs -qrtems -fasm"
+
+export TARGET_SYSTEM=powerpc-rtems
 export RTEMS_BSPS="beatnik mvme3100 svgm"
 
