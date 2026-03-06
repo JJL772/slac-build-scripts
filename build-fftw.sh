@@ -2,7 +2,7 @@
 # vim: ts=4 sw=4 et
 set -e
 VER="$1"
-ARCH="$2"
+TARGET="$2"
 
 TOP="$(realpath "$(dirname "${BASH_SOURCE[0]}")")"
 
@@ -16,7 +16,7 @@ function usage {
 if [ -z "$VER" ]; then
     usage
 fi
-if [ -z "$ARCH" ]; then
+if [ -z "$TARGET" ]; then
     usage
 fi
 
@@ -29,8 +29,8 @@ if [ ! -d "fftw-$VER" ]; then
     tar -xf "fftw-${VER}.tar.gz"
 fi
 
-mkdir -p "build/$ARCH"
-cd "build/$ARCH"
+mkdir -p "build/$TARGET"
+cd "build/$TARGET"
 
 # Need to build for both default and single precision floats
 for type in default single; do
@@ -43,26 +43,26 @@ for type in default single; do
         EXTRA_ARGS="--enable-single"
     fi
 
-    if [[ $ARCH = *"rtems"* ]]; then
+    if [[ $TARGET = *"rtems"* ]]; then
         echo "Building for RTEMS"
 
-        . ${TOP}/toolchains/${ARCH}.bash
+        . ${TOP}/toolchains/${TARGET}.bash
         # Bit of a hack; otherwise some application we can't disable won't link
         export LDFLAGS="$LDFLAGS -Wl,-u,main"
     
-        ../../../fftw-${VER}/configure --prefix="${PWD}/../../../${ARCH}" --disable-fortran --with-our-malloc16 --host ${TARGET_SYSTEM} $EXTRA_ARGS
+        ../../../fftw-${VER}/configure --prefix="${PWD}/../../../${TARGET}" --disable-fortran --with-our-malloc16 --host ${TARGET_SYSTEM} $EXTRA_ARGS
 
-    elif [[ $ARCH = *"buildroot"* ]]; then
+    elif [[ $TARGET = *"buildroot"* ]]; then
         echo "Building for buildroot"
 
-        . $TOP/toolchains/$ARCH.bash
+        . $TOP/toolchains/$TARGET.bash
         export PATH="${TOOLCHAIN_PATH}/bin:$PATH"
 
-        ../../../fftw-${VER}/configure --prefix="${PWD}/../../../${ARCH}" --disable-fortran --with-our-malloc16 --host ${TARGET_SYSTEM} $EXTRA_ARGS
+        ../../../fftw-${VER}/configure --prefix="${PWD}/../../../${TARGET}" --disable-fortran --with-our-malloc16 --host ${TARGET_SYSTEM} $EXTRA_ARGS
 
     else
         # Standard Linux build
-        ../../../fftw-${VER}/configure --prefix="${PWD}/../../../${ARCH}" $EXTRA_ARGS
+        ../../../fftw-${VER}/configure --prefix="${PWD}/../../../${TARGET}" $EXTRA_ARGS
     fi
 
     make -j$(nproc) install
