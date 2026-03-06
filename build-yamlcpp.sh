@@ -21,10 +21,19 @@ if [ -z "$TARGET" ]; then
 fi
 
 cd $EPICS_PACKAGE_TOP/yaml-cpp/$VER/src
+
+# Apply patches
+if [ ! -f .yaml-cpp_patches-applied ]; then
+    for f in "$TOP/patches/*-yaml-cpp*.diff"; do
+        patch -u -p1 < $f
+    done
+    touch .yaml-cpp_patches-applied
+fi
+
 mkdir -p ../build
 
 if [[ $TARGET =~ "buildroot"* ]]; then
-    EXTRA_CMAKE_ARGS="-DCMAKE_TOOLCHAIN_FILE=${TOP}/toolchains/${TARGET}.cmake"
+    EXTRA_CMAKE_ARGS="-DCMAKE_TOOLCHAIN_FILE=${TOP}/cmake-toolchains/${TARGET}.cmake"
 fi
 
 # Boost build? darn...
