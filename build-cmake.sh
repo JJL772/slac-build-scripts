@@ -17,8 +17,8 @@ if [ -z "$VER" ]; then
     usage
 fi
 
-mkdir -p $EPICS_PACKAGE_TOP/cmake/$VER
-pushd $EPICS_PACKAGE_TOP/cmake/$VER
+mkdir -p $PACKAGE_SITE_TOP/cmake/$VER
+pushd $PACKAGE_SITE_TOP/cmake/$VER
 
 if [ ! -d src ]; then
     git clone git@github.com:Kitware/CMake.git src
@@ -38,7 +38,7 @@ fi
 mkdir -p build/$TARGET
 cd build/$TARGET
 pwd
-../../src/configure --prefix="$EPICS_PACKAGE_TOP/cmake/$VER/$TARGET" --no-qt-gui
+../../src/configure --prefix="$PACKAGE_SITE_TOP/cmake/$VER/$TARGET" --no-qt-gui
 
 make -j12 && make install
 

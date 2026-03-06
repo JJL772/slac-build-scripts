@@ -20,7 +20,7 @@ if [ -z "$TARGET" ]; then
     usage
 fi
 
-cd $EPICS_PACKAGE_TOP/yaml-cpp/$VER/src
+cd $PACKAGE_SITE_TOP/yaml-cpp/$VER/src
 
 # Apply patches
 if [ ! -f .yaml-cpp_patches-applied ]; then
@@ -38,7 +38,7 @@ fi
 
 # Boost build? darn...
 if [[ $VER =~ "boost-1.64.0" ]]; then
-    BOOST_ROOT="$EPICS_PACKAGE_TOP/boost/1.64.0/$TARGET"
+    BOOST_ROOT="$PACKAGE_SITE_TOP/boost/1.64.0/$TARGET"
     EXTRA_CMAKE_ARGS="$EXTRA_CMAKE_ARGS -DBOOST_ROOT=${BOOST_ROOT} -DBoost_INCLUDE_DIR=${BOOST_ROOT}/include"
     echo "Using boost"
 fi

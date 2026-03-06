@@ -2,13 +2,13 @@
 
 set -e
 
-TOP="$EPICS_PACKAGE_TOP/build-scripts"
+TOP="$PACKAGE_SITE_TOP/build-scripts"
 
 VERSION="$1"
 TARGET="$2"
 
-mkdir -p "$EPICS_PACKAGE_TOP/uldaq"
-cd "$EPICS_PACKAGE_TOP/uldaq"
+mkdir -p "$PACKAGE_SITE_TOP/uldaq"
+cd "$PACKAGE_SITE_TOP/uldaq"
 
 if [ -z "$VERSION" ] || [ -z "$TARGET" ]; then
     echo "USAGE: $0 1.2.1 rhel9-x86_64"
@@ -39,9 +39,9 @@ mkdir -p "build/$TARGET"
 cd "build/$TARGET"
 
 # Add libusb to PKG_CONFIG path
-#export PKG_CONFIG_PATH="$EPICS_PACKAGE_TOP/libusb/v1.0.0/$TARGET/lib/pkgconfig:/usr/lib64/pkgconfig"
+#export PKG_CONFIG_PATH="$PACKAGE_SITE_TOP/libusb/v1.0.0/$TARGET/lib/pkgconfig:/usr/lib64/pkgconfig"
 
-LIBUSB="$EPICS_PACKAGE_TOP/libusb/v1.0.20/$TARGET"
+LIBUSB="$PACKAGE_SITE_TOP/libusb/v1.0.20/$TARGET"
 export CFLAGS="-I$LIBUSB/include -isystem $LIBUSB/include"
 export CXXFLAGS="-I$LIBUSB/include -isystem $LIBUSB/include"
 export LDFLAGS="-L$LIBUSB/lib"

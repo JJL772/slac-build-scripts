@@ -20,8 +20,8 @@ if [ -z "$ARCH" ]; then
     usage
 fi
 
-mkdir -p $EPICS_PACKAGE_TOP/fftw/fftw-$VER
-cd $EPICS_PACKAGE_TOP/fftw/fftw-$VER
+mkdir -p $PACKAGE_SITE_TOP/fftw/fftw-$VER
+cd $PACKAGE_SITE_TOP/fftw/fftw-$VER
 
 # Grab tarball
 if [ ! -d "fftw-$VER" ]; then

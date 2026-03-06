@@ -9,8 +9,8 @@ if [ -z "$VERSION" ] || [ -z "$TARGET" ]; then
     exit 1
 fi
 
-mkdir -p "$EPICS_PACKAGE_TOP/libusb/$VERSION"
-cd "$EPICS_PACKAGE_TOP/libusb/$VERSION"
+mkdir -p "$PACKAGE_SITE_TOP/libusb/$VERSION"
+cd "$PACKAGE_SITE_TOP/libusb/$VERSION"
 
 if [ ! -d src ]; then
     git clone https://github.com/libusb/libusb.git src -b "$VERSION"

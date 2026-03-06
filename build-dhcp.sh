@@ -20,8 +20,8 @@ if [ -z "$TARGET" ]; then
     usage
 fi
 
-mkdir -p $EPICS_PACKAGE_TOP/dhcp/$VER
-cd $EPICS_PACKAGE_TOP/dhcp/$VER
+mkdir -p $PACKAGE_SITE_TOP/dhcp/$VER
+cd $PACKAGE_SITE_TOP/dhcp/$VER
 
 mkdir -p "build/$TARGET"
 cd "build/$TARGET"

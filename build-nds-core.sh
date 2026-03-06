@@ -2,13 +2,13 @@
 
 set -e
 
-TOP="$EPICS_PACKAGE_TOP/build-scripts"
+TOP="$PACKAGE_SITE_TOP/build-scripts"
 
 VERSION="$1"
 TARGET="$2"
 
-mkdir -p "$EPICS_PACKAGE_TOP/nds-core"
-cd "$EPICS_PACKAGE_TOP/nds-core"
+mkdir -p "$PACKAGE_SITE_TOP/nds-core"
+cd "$PACKAGE_SITE_TOP/nds-core"
 
 if [ -z "$VERSION" ] || [ -z "$TARGET" ]; then
     echo "USAGE: $0 3.2.0 rhel9-x86_64"
