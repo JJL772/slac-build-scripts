@@ -2,7 +2,7 @@
 # vim: ts=4 sw=4 et
 set -e
 VER="$1"
-ARCH="$2"
+TARGET="$2"
 
 TOP="$(realpath "$(dirname "${BASH_SOURCE[0]}")")"
 
@@ -16,7 +16,7 @@ function usage {
 if [ -z "$VER" ]; then
     usage
 fi
-if [ -z "$ARCH" ]; then
+if [ -z "$TARGET" ]; then
     usage
 fi
 
@@ -34,10 +34,10 @@ if [ ! -d net-snmp-$VER ]; then
     tar -xf "net-snmp-$VER.tar.gz"
 fi
 
-mkdir -p build/$ARCH
-cd build/$ARCH
+mkdir -p build/$TARGET
+cd build/$TARGET
 
-../../net-snmp-$VER/configure --prefix="$PWD/../../$ARCH" \
+../../net-snmp-$VER/configure --prefix="$PWD/../../$TARGET" \
     --enable-shared --enable-static --with-default-snmp-version=3 --with-sys-contact=root@localhost \
     --with-sys-location=Unknown --with-logfile=/var/log/snmpd.log --with-persistent-directory=/var/lib/net-snmp \
     --enable-ipv6 --enable-ucd-snmp-compatibility --with-openssl=internal --with-pic \

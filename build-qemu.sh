@@ -2,7 +2,7 @@
 
 set -e
 VER="$1"
-ARCH="$2"
+TARGET="$2"
 
 TOP="$(realpath "$(dirname "${BASH_SOURCE[0]}")")"
 
@@ -16,7 +16,7 @@ function usage {
 if [ -z "$VER" ]; then
     usage
 fi
-if [ -z "$ARCH" ]; then
+if [ -z "$TARGET" ]; then
     usage
 fi
 
@@ -28,12 +28,12 @@ if [ ! -d src ]; then
     git clone --depth=1 https://github.com/qemu/qemu.git src -b $VER
 fi
 
-mkdir -p build/$ARCH
-cd build/$ARCH
+mkdir -p build/$TARGET
+cd build/$TARGET
 
 source $EPICS_PACKAGE_TOP/anaconda/envs/python3.10envs/v1.0/bin/activate
 
 ../../src/configure --target-list="ppc-softmmu arm-softmmu aarch64-softmmu riscv32-softmmu riscv64-softmmu i386-softmmu x86_64-softmmu m68k-softmmu" \
-    --prefix="$PWD/../../$ARCH" --disable-docs --disable-containers --disable-opengl --disable-sdl --enable-slirp
+    --prefix="$PWD/../../$TARGET" --disable-docs --disable-containers --disable-opengl --disable-sdl --enable-slirp
 
 make -j$(nproc) && make install -j$(nproc)
