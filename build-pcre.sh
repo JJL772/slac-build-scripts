@@ -8,8 +8,8 @@ if [ -z "$VERSION" ] || [ -z "$TARGET" ]; then
     exit 1
 fi
 
-mkdir -p "$EPICS_PACKAGE_TOP/pcre/$VERSION"
-cd "$EPICS_PACKAGE_TOP/pcre/$VERSION"
+mkdir -p "$PACKAGE_SITE_TOP/pcre/$VERSION"
+cd "$PACKAGE_SITE_TOP/pcre/$VERSION"
 
 if [ ! -d pcre-$VERSION ]; then
     wget "https://sourceforge.net/projects/pcre/files/pcre/$VERSION/pcre-$VERSION.tar.gz/download" -O "pcre-$VERSION.tar.gz"

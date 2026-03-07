@@ -20,15 +20,15 @@ if [ -z "$TARGET" ]; then
     usage
 fi
 
-mkdir -p $EPICS_PACKAGE_TOP/dhcp/$VER
-cd $EPICS_PACKAGE_TOP/dhcp/$VER
+mkdir -p $PACKAGE_SITE_TOP/dhcp/$VER
+cd $PACKAGE_SITE_TOP/dhcp/$VER
 
 mkdir -p "build/$TARGET"
 cd "build/$TARGET"
 
 if [[ $TARGET = *"buildroot"* ]]; then
     echo "Building for buildroot"
-    . $EPICS_PACKAGE_TOP/build-scripts/toolchains/$TARGET.bash
+    . ${TOP}/toolchains/$TARGET.bash
     export PATH="${TOOLCHAIN_PATH}/bin:$PATH"
     ../../dhcp-$VER/configure --prefix="$PWD/../../$TARGET" --host $TARGET_SYSTEM --with-randomdev=no
 else

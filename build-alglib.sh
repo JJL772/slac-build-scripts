@@ -20,8 +20,8 @@ if [ -z "$TARGET" ]; then
     usage
 fi
 
-mkdir -p $EPICS_PACKAGE_TOP/alglib/$VER
-cd $EPICS_PACKAGE_TOP/alglib/$VER
+mkdir -p $PACKAGE_SITE_TOP/alglib/$VER
+cd $PACKAGE_SITE_TOP/alglib/$VER
 
 # Clone alglib-gnubld if not already
 if [ ! -d alglib-gnubld ]; then
@@ -43,11 +43,11 @@ cd "build/$TARGET"
 
 if [[ $TARGET = *"rtems"* ]]; then
     echo "Building for RTEMS"
-    . $EPICS_PACKAGE_TOP/build-scripts/toolchains/$TARGET.bash
-    ../../alglib-gnubld/configure --prefix="$PWD/../../$TARGET" --enable-rtemsbsp="${RTEMS_BSPS}" --exec-prefix="${EPICS_PACKAGE_TOP}/alglib/$VER/RTEMS-\${rtems_bsp}" --with-rtems-top="${RTEMS_TOP}"
+    . ${TOP}/toolchains/$TARGET.bash
+    ../../alglib-gnubld/configure --prefix="$PWD/../../$TARGET" --enable-rtemsbsp="${RTEMS_BSPS}" --exec-prefix="${PACKAGE_SITE_TOP}/alglib/$VER/RTEMS-\${rtems_bsp}" --with-rtems-top="${RTEMS_TOP}"
 elif [[ $TARGET = *"buildroot"* ]]; then
     echo "Building for buildroot"
-    . $EPICS_PACKAGE_TOP/build-scripts/toolchains/$TARGET.bash
+    . ${TOP}/toolchains/$TARGET.bash
     export PATH="${TOOLCHAIN_PATH}/bin:$PATH"
     ../../alglib-gnubld/configure --prefix="$PWD/../../$TARGET" --host $TARGET_SYSTEM
 else

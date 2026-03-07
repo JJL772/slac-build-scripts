@@ -6,5 +6,6 @@ export CC="m68k-rtems-gcc"
 export CXX="m68k-rtems-g++"
 export AR="m68k-rtems-gcc-ar"
 
+export TARGET_SYSTEM=m68k-rtems
 export RTEMS_BSPS="uC5282"
 

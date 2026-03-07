@@ -20,8 +20,8 @@ if [ -z "$TARGET" ]; then
     usage
 fi
 
-mkdir -p $EPICS_PACKAGE_TOP/net-snmp/$VER
-cd $EPICS_PACKAGE_TOP/net-snmp/$VER
+mkdir -p $PACKAGE_SITE_TOP/net-snmp/$VER
+cd $PACKAGE_SITE_TOP/net-snmp/$VER
 
 # Check if tarball exists
 if [ ! -f net-snmp-$VER.tar.gz ]; then

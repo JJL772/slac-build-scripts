@@ -20,8 +20,8 @@ if [ -z "$TARGET" ]; then
     usage
 fi
 
-mkdir -p $EPICS_PACKAGE_TOP/tirpc/$VER
-cd $EPICS_PACKAGE_TOP/tirpc/$VER
+mkdir -p $PACKAGE_SITE_TOP/tirpc/$VER
+cd $PACKAGE_SITE_TOP/tirpc/$VER
 
 # Download and extract if not already
 if [ ! -d src ]; then

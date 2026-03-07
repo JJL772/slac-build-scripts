@@ -20,8 +20,8 @@ if [ -z "$TARGET" ]; then
     usage
 fi
 
-mkdir -p $EPICS_PACKAGE_TOP/qemu/$VER
-cd $EPICS_PACKAGE_TOP/qemu/$VER
+mkdir -p $PACKAGE_SITE_TOP/qemu/$VER
+cd $PACKAGE_SITE_TOP/qemu/$VER
 
 # Download and extract if not already
 if [ ! -d src ]; then
@@ -31,7 +31,7 @@ fi
 mkdir -p build/$TARGET
 cd build/$TARGET
 
-source $EPICS_PACKAGE_TOP/anaconda/envs/python3.10envs/v1.0/bin/activate
+source $PACKAGE_SITE_TOP/anaconda/envs/python3.10envs/v1.0/bin/activate
 
 ../../src/configure --target-list="ppc-softmmu arm-softmmu aarch64-softmmu riscv32-softmmu riscv64-softmmu i386-softmmu x86_64-softmmu m68k-softmmu" \
     --prefix="$PWD/../../$TARGET" --disable-docs --disable-containers --disable-opengl --disable-sdl --enable-slirp
