@@ -15,7 +15,7 @@ using gcc : : /sdf/sw/epics/package/linuxRT/buildroot-2019.08/host/linux-x86_64/
 project : default-build <toolset>gcc ;
 
 # Python configuration
-#using python : 3.6 : /sdf/sw/epics/package/python/3.6.1/buildroot-2019.08-x86_64/bin/python3 : /sdf/sw/epics/package/python/3.6.1/buildroot-2019.08-x86_64/include/python3.6m/ : /sdf/sw/epics/package/python/3.6.1/buildroot-2019.08-x86_64/lib/ ;
+using python : 3.8 : /sdf/sw/epics/package/anaconda/envs/python3.8envs/v2.4/buildroot-2019.08-x86_64/bin/python3 : /sdf/sw/epics/package/anaconda/envs/python3.8envs/v2.4/buildroot-2019.08-x86_64/include/python3.8/ : /sdf/sw/epics/package/anaconda/envs/python3.8envs/v2.4/buildroot-2019.08-x86_64/lib/ ;
 
 path-constant ICU_PATH : /sdf/sw/epics/package/linuxRT/buildroot-2019.08/buildroot-2019.08-x86_64/output/staging/usr ;
 
